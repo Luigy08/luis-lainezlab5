@@ -20,7 +20,7 @@ int main(int argc, char const *argv[])
 	int op=0;
 	while(op!=10){
 		cout<<"1.-Agregar"<<endl<<"2.-Suma"<<endl<<"3.-Menos unario"<<endl<<"4.-Resta"<<endl<<"5.-Multiplicacion"<<endl<<
-		"6.-Transpuesta"<<endl<<"7.-Comparacion"<<endl<<"8.-Diferencia"<<endl<<"";
+		"6.-Transpuesta"<<endl<<"7.-Comparacion"<<endl<<"8.-Diferencia"<<endl<<"9.-Inversa"<<endl;
 		cin>>op;
 		switch(op){
 			case 1:{
