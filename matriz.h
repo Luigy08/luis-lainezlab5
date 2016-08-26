@@ -3,22 +3,28 @@ using std::istream;
 using std::ostream;
 #include <string>
 using std::string;
-
+#pragma once
 class matriz
 {
 	friend ostream& operator<<(ostream&, const matriz&); 
-  	friend istream& operator>>(istream&, matriz&);
+  	//friend istream& operator>>(istream&, matriz&);
 	private:
 		int fila,columna;
-		double _matriz[][];
-	public:
+		double** arreglo;
 
-		string toString()const;
+	public:
+		int getFila();
+		int getColumna();
+		double** getArreglo();
 		const matriz operator+(const matriz&)const;
 		const matriz operator-(const matriz&)const;
 		const matriz operator-()const;
+		const matriz operator()()const;
 		const matriz operator*(const matriz&)const;
-		matriz();
+		const bool	 operator==(const matriz&)const;
+		const bool	 operator!=(const matriz&)const;
+		string toString()const;
+		matriz(int,int);
 		~matriz();
 	
 };

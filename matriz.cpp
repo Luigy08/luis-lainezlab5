@@ -11,11 +11,29 @@ using std::ostream;
 matriz::matriz(int fila,int columna){
 	this->fila=fila;
 	this->columna=columna;
-	double tem[fila][columna];
-	this->_matriz[][]=tem;
+	arreglo=new double*[fila];
+	for (int i = 0; i < fila; i++)
+	{
+		arreglo[i]=new double[columna];
+	}
 }
 matriz::~matriz(){
 
+}
+ostream& operator<<(ostream& out, const matriz& r){
+    out << r.toString();
+    return out;
+
+
+}
+int matriz::getFila(){
+	return fila;
+}
+int matriz::getColumna(){
+	return columna;
+}
+double** matriz::getArreglo(){
+	return arreglo;
 }
 string matriz::toString()const{
     stringstream ss;
@@ -29,7 +47,8 @@ const matriz matriz::operator+(const matriz& m)const{
     {
     	for (int j = 0; j < m.columna; j++)
     	{
-    		salida[i][j]=this->_matriz[i][j]+m._matriz[i][j];
+
+    		salida.arreglo[i][j]=this->arreglo[i][j]+m.arreglo[i][j];
     	}
     }
 
@@ -41,7 +60,7 @@ const matriz matriz::operator-(const matriz& m)const{
     {
     	for (int j = 0; j < m.columna; j++)
     	{
-    		salida[i][j]=this->_matriz[i][j]-m._matriz[i][j];
+    		salida.arreglo[i][j]=this->arreglo[i][j]-m.arreglo[i][j];
     	}
     }
 
@@ -49,29 +68,86 @@ const matriz matriz::operator-(const matriz& m)const{
 }
 const matriz matriz::operator-()const{
 	matriz salida(this->fila,this->columna);
-	for (int i = 0; i < count; i++)
+	for (int i = 0; i < this->fila; i++)
 	{
-		for (int j = 0; j < count; j++)
+		for (int j = 0; j < this->columna; j++)
 		{
-			salida[i][j]=this->_matriz[i][j]*-1;
+			salida.arreglo[i][j]=this->arreglo[i][j]*-1;
 		}
 	}
 	return salida;
 }
-const matriz matriz::operator-(const matriz& m)const{
-    matriz salida(m.fila,m.columna);
+const matriz matriz::operator*(const matriz& m)const{
+    matriz salida(this->columna,m.fila);
     
-    for (int i = 0; i < m.fila; i++)
+    for (int i = 0; i < this->fila; i++)
     {
-    	;
+    	
     	for (int j = 0; j < this->columna; j++)
     	{
-    		double temp=0		
+    		double temp=0;		
     		for (int k = 0; k < this->columna; k++)
     		{
-    			temp+=this->_matriz[j][k]*m._matriz[k][j];
+    			salida.arreglo[i][j]+=this->arreglo[i][j]*m.arreglo[k][j];
     		}
-    		salida[i][j]=temp;
+    		
+    	}
+
+    }
+
+    return salida;
+}
+const matriz matriz::operator()()const{
+    matriz salida(this->columna,this->fila);
+    
+    for (int i = 0; i < this->fila; i++)
+    {
+    	
+    	for (int j = 0; j < this->columna; j++)
+    	{
+    		salida.arreglo[j][i]=this->arreglo[i][j];
+    	}
+
+    }
+
+    return salida;
+}
+const bool matriz::operator==(const matriz& m)const{
+    bool salida=true;
+    if (this->fila!=m.fila||this->columna!=m.columna)
+    {
+    	salida=false;
+    }
+    for (int i = 0; i < this->fila; i++)
+    {
+    	
+    	for (int j = 0; j < this->columna; j++)
+    	{
+    		if (this->arreglo[i][j]!=m.arreglo[i][j])
+    		{
+    			salida=false;
+    		}
+    	}
+
+    }
+
+    return salida;
+}
+const bool matriz::operator!=(const matriz& m)const{
+    bool salida=true;
+    if (this->fila==m.fila||this->columna==m.columna)
+    {
+    	salida=false;
+    }
+    for (int i = 0; i < this->fila; i++)
+    {
+    	
+    	for (int j = 0; j < this->columna; j++)
+    	{
+    		if (this->arreglo[i][j]==m.arreglo[i][j])
+    		{
+    			salida=false;
+    		}
     	}
 
     }
