@@ -45,7 +45,7 @@ int main(int argc, char const *argv[])
 				break;
 			}
 			case 2:{
-				cout<<"\tSUMA"<<endl;
+				cout<<"\tSUMA "<<endl;
 				for (int i = 0; i < matrices.size(); i++)
 				{
 					cout<<"Matriz "<<i+1<<": "<<matrices[i]<<endl;
