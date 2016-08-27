@@ -16,7 +16,6 @@ class matriz
 		int getFila();
 		int getColumna();
 		double** getArreglo();
-		double** haceUno(double**,int,int,int);
 		const matriz operator+(const matriz&)const;
 		const matriz operator-(const matriz&)const;
 		const matriz operator-()const;
